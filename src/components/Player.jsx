@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,Suspense } from "react";
 import useSound from "use-sound"; // for handling the sound
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"; // icons for play and pause
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
@@ -8,6 +8,7 @@ import { IconContext } from "react-icons"; // for customazing the icons
 import "./Player.css";
 import { audioPlayer } from "./audio";
 import { ColorRing } from 'react-loader-spinner'
+
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -103,13 +104,32 @@ const Player = () => {
         <div className="component">
           <h2>Playing Now</h2>
           <div>
-            {
+            <Suspense fallback={ <ColorRing
+            visible={true}
+            height="300"
+            width="180"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+          />}>
+
+<img
+            className="musicCover"
+            src={currentSong.imageSrc}
+            alt="cover pic"
+          />
+            </Suspense>
+            {/* {
+             currentSong.imageSrc!== audioPlayer.imageSrc ?(
+              
             <img
-              className="musicCover"
-              src={currentSong.imageSrc}
-              alt="cover pic"
-            /> || 
-            <div>
+            className="musicCover"
+            src={currentSong.imageSrc}
+            alt="cover pic"
+          />
+             ):(
+              <div>
             <ColorRing
             visible={true}
             height="300"
@@ -123,7 +143,9 @@ const Player = () => {
           className="loading-text"
           >Loading Music...</p>
             </div>
-            }
+             )
+             
+            } */}
             <h3 className="title"> {currentSong.title} </h3>
             <p className="subTitle">{currentSong.subTitle}</p>
           </div>
