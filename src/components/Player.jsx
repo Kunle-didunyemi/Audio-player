@@ -7,8 +7,7 @@ import { IoVolumeMuteOutline } from "react-icons/io5";
 import { IconContext } from "react-icons"; // for customazing the icons
 import "./Player.css";
 import { audioPlayer } from "./audio";
-import { ColorRing } from 'react-loader-spinner'
-
+import { ColorRing } from "react-loader-spinner";
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -24,6 +23,7 @@ const Player = () => {
     min: 0,
     sec: 0,
   });
+  const [loading, setLoading] = useState(false);
 
   const [seconds, setSeconds] = useState(0); // current position of the audio in seconds
 
@@ -36,7 +36,6 @@ const Player = () => {
       setIsPlaying(true);
     }
   };
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,6 +61,11 @@ const Player = () => {
       sec: secRemain,
     });
   }, [isPlaying, duration]);
+
+  // useEffect(() => {
+  //   const onPageLoading = () => {
+  //     setLoading(true);
+  //   }});
 
   const prevAudio = () => {
     const index = audioPlayer.findIndex((x) => x.title === currentSong.title);
@@ -91,45 +95,44 @@ const Player = () => {
 
   return (
     <div
-      style={
-        {
-          background: `url(${currentSong.imageSrc})`,
-          // backgroundSize: 'cover',
-          // backgroundRepeat: 'no-repeat',
-          // overflow: 'hidden',
-        }
-      }
+      style={{
+        background: `url(${currentSong.imageSrc})`,
+        // backgroundSize: 'cover',
+        // backgroundRepeat: 'no-repeat',
+        // overflow: 'hidden',
+      }}
       className="body"
     >
       <div className="bgBlur">
         <div className="component">
           <h2>Playing Now</h2>
           <div>
-            {
-              document.readyState === 'complete' ? ( 
-                <img
-            className="musicCover"
-            src={currentSong.imageSrc}
-            alt="cover pic"
-          />
-              ) : ( 
-                <div>
+            {document.readyState === "interactive" ? (
+              <div>
                 <ColorRing
-                visible={true}
-                height="300"
-                width="180"
-                ariaLabel="blocks-loading"
-                wrapperStyle={{}}
-                wrapperClass="blocks-wrapper"
-                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                  visible={true}
+                  height="300"
+                  width="180"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
+                <p className="loading-text">Loading Music...</p>
+              </div>
+            ) : (
+              <img
+                className="musicCover"
+                src={currentSong.imageSrc}
+                alt="cover pic"
               />
-              <p
-              className="loading-text"
-              >Loading Music...</p>
-                </div>
-              )
-
-            }
+            )}
             <h3 className="title"> {currentSong.title} </h3>
             <p className="subTitle">{currentSong.subTitle}</p>
           </div>
@@ -179,7 +182,11 @@ const Player = () => {
 
           <div className="btns">
             <button
-            onClick={prevAudio} className="playButton">
+              onClick={() => {
+                prevAudio();
+              }}
+              className="playButton"
+            >
               <IconContext.Provider value={{ size: "3em", color: " #fff" }}>
                 <BiSkipPrevious />
               </IconContext.Provider>
