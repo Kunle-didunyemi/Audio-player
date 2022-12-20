@@ -64,10 +64,6 @@ const Player = () => {
     });
   }, [isPlaying, duration]);
 
-  // useEffect(() => {
-  //   const onPageLoading = () => {
-  //     setLoading(true);
-  //   }});
 
   const prevAudio = () => {
     const index = audioPlayer.findIndex((x) => x.title === currentSong.title);
@@ -84,7 +80,6 @@ const Player = () => {
     setTimeout(() => {
                   setIsAlertVisible(false);
              }, 1000);
-    // playingButton();
   };
 
   const nextAudio = () => {
@@ -101,17 +96,13 @@ const Player = () => {
 
     setTimeout(() => {
                   setIsAlertVisible(false);
-             }, 2000);
-    // playingButton();
+             }, 1500);
   };
 
   return (
     <div
       style={{
         background: `url(${currentSong.imageSrc})`,
-        // backgroundSize: 'cover',
-        // backgroundRepeat: 'no-repeat',
-        // overflow: 'hidden',
       }}
       className="body"
     >
@@ -153,7 +144,7 @@ const Player = () => {
             <p className="subTitle">{currentSong.subTitle}</p>
           </div>
 
-          <div>
+          <div className="input-wrapper">
             <div className="time">
               <p>
                 {currTime.min || 0}:{currTime.sec || 0}
@@ -205,25 +196,25 @@ const Player = () => {
               }}
               className="playButton"
             >
-              <IconContext.Provider value={{ size: "3em", color: " #fff" }}>
+              <IconContext.Provider value={{ size: "3.5em", color: " #fff" }}>
                 <BiSkipPrevious />
               </IconContext.Provider>
             </button>
             {!isPlaying ? (
               <button className="playButton" onClick={playingButton}>
-                <IconContext.Provider value={{ size: "3em", color: "#fff" }}>
+                <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
                   <AiFillPlayCircle />
                 </IconContext.Provider>
               </button>
             ) : (
               <button className="playButton" onClick={playingButton}>
-                <IconContext.Provider value={{ size: "3em", color: "#fff" }}>
+                <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
                   <AiFillPauseCircle />
                 </IconContext.Provider>
               </button>
             )}
             <button onClick={nextAudio} className="playButton">
-              <IconContext.Provider value={{ size: "3em", color: "#fff" }}>
+              <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
                 <BiSkipNext />
               </IconContext.Provider>
             </button>
