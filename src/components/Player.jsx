@@ -8,6 +8,7 @@ import { IconContext } from "react-icons"; // for customazing the icons
 import "./Player.css";
 import { audioPlayer } from "./audio";
 import { ColorRing } from "react-loader-spinner";
+import Spinner from "./Spinner";
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -23,7 +24,8 @@ const Player = () => {
     min: 0,
     sec: 0,
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [ isAlertVisible, setIsAlertVisible ] = useState(false);
 
   const [seconds, setSeconds] = useState(0); // current position of the audio in seconds
 
@@ -77,6 +79,11 @@ const Player = () => {
     setCurrTime(0);
     setIsPlaying(false);
     stop();
+    setIsAlertVisible(true);
+
+    setTimeout(() => {
+                  setIsAlertVisible(false);
+             }, 1000);
     // playingButton();
   };
 
@@ -90,6 +97,11 @@ const Player = () => {
     setCurrTime(0);
     setIsPlaying(false);
     stop();
+    setIsAlertVisible(true);
+
+    setTimeout(() => {
+                  setIsAlertVisible(false);
+             }, 2000);
     // playingButton();
   };
 
@@ -107,7 +119,7 @@ const Player = () => {
         <div className="component">
           <h2>Playing Now</h2>
           <div>
-            {document.readyState === "interactive" ? (
+            {document.readyState === "interactive" && loading ? (
               <div>
                 <ColorRing
                   visible={true}
@@ -131,8 +143,12 @@ const Player = () => {
                 className="musicCover"
                 src={currentSong.imageSrc}
                 alt="cover pic"
-              />
+              /> 
             )}
+
+{isAlertVisible && <Spinner/>
+        }
+
             <h3 className="title"> {currentSong.title} </h3>
             <p className="subTitle">{currentSong.subTitle}</p>
           </div>
@@ -184,6 +200,8 @@ const Player = () => {
             <button
               onClick={() => {
                 prevAudio();
+                  setLoading(true)
+                
               }}
               className="playButton"
             >
