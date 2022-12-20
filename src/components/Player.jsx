@@ -7,7 +7,6 @@ import { IoVolumeMuteOutline } from "react-icons/io5";
 import { IconContext } from "react-icons"; // for customazing the icons
 import "./Player.css";
 import { audioPlayer } from "./audio";
-import { motion } from "framer-motion";
 import { ColorRing } from 'react-loader-spinner'
 
 const Player = () => {
@@ -105,16 +104,15 @@ const Player = () => {
           <h2>Playing Now</h2>
           <div>
             {
-
-            // <img
-            //   className="musicCover"
-            //   src={currentSong.imageSrc}
-            //   alt="cover pic"
-            // /> || 
+            <img
+              className="musicCover"
+              src={currentSong.imageSrc}
+              alt="cover pic"
+            /> || 
             <div>
             <ColorRing
             visible={true}
-            height="350"
+            height="300"
             width="180"
             ariaLabel="blocks-loading"
             wrapperStyle={{}}
@@ -140,10 +138,7 @@ const Player = () => {
               </p>
             </div>
             {isPlaying && mute ? (
-              <motion.button
-              initial={{scale:0, opacity:1}}
-            animate={{scale:1.4, opacity:1}}
-            exit={{scale:0, opacity:1}}
+              <button
                 onClick={() => {
                   sound.volume(1);
                   setMute(false);
@@ -151,12 +146,9 @@ const Player = () => {
                 className="muteBtn2"
               >
                 <IoVolumeMuteOutline />
-              </motion.button>
+              </button>
             ) : (
-              <motion.button
-              initial={{scale:0, opacity:1}}
-            animate={{scale:1, opacity:1}}
-            exit={{scale:0, opacity:1}}
+              <button
                 onClick={() => {
                   sound.volume(0);
                   setMute(true);
@@ -164,7 +156,7 @@ const Player = () => {
                 className="muteBtn"
               >
                 <VscUnmute />
-              </motion.button>
+              </button>
             )}
             <input
               type="range"
