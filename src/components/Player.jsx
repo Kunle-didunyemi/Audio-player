@@ -25,7 +25,7 @@ const Player = () => {
     sec: 0,
   });
   const [loading, setLoading] = useState(true);
-  const [ isAlertVisible, setIsAlertVisible ] = useState(false);
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
 
   const [seconds, setSeconds] = useState(0); // current position of the audio in seconds
 
@@ -64,7 +64,6 @@ const Player = () => {
     });
   }, [isPlaying, duration]);
 
-
   const prevAudio = () => {
     const index = audioPlayer.findIndex((x) => x.title === currentSong.title);
     if (index === 0) {
@@ -78,8 +77,8 @@ const Player = () => {
     setIsAlertVisible(true);
 
     setTimeout(() => {
-                  setIsAlertVisible(false);
-             }, 1000);
+      setIsAlertVisible(false);
+    }, 1000);
   };
 
   const nextAudio = () => {
@@ -95,8 +94,8 @@ const Player = () => {
     setIsAlertVisible(true);
 
     setTimeout(() => {
-                  setIsAlertVisible(false);
-             }, 1500);
+      setIsAlertVisible(false);
+    }, 1500);
   };
 
   return (
@@ -134,11 +133,10 @@ const Player = () => {
                 className="musicCover"
                 src={currentSong.imageSrc}
                 alt="cover pic"
-              /> 
+              />
             )}
 
-{isAlertVisible && <Spinner/>
-        }
+            {isAlertVisible && <Spinner />}
 
             <h3 className="title"> {currentSong.title} </h3>
             <p className="subTitle">{currentSong.subTitle}</p>
@@ -189,10 +187,10 @@ const Player = () => {
 
           <div className="btns">
             <button
+              data-hover="Prev"
               onClick={() => {
                 prevAudio();
-                  setLoading(true)
-                
+                setLoading(true);
               }}
               className="playButton"
             >
@@ -201,19 +199,31 @@ const Player = () => {
               </IconContext.Provider>
             </button>
             {!isPlaying ? (
-              <button className="playButton" onClick={playingButton}>
+              <button
+                data-hover="Play"
+                className="playButton"
+                onClick={playingButton}
+              >
                 <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
                   <AiFillPlayCircle />
                 </IconContext.Provider>
               </button>
             ) : (
-              <button className="playButton" onClick={playingButton}>
+              <button
+                data-hover="Pause"
+                className="playButton"
+                onClick={playingButton}
+              >
                 <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
                   <AiFillPauseCircle />
                 </IconContext.Provider>
               </button>
             )}
-            <button onClick={nextAudio} className="playButton">
+            <button
+              onClick={nextAudio}
+              data-hover="Next"
+              className="playButton"
+            >
               <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
                 <BiSkipNext />
               </IconContext.Provider>
