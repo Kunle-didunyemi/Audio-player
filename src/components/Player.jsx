@@ -204,7 +204,7 @@ const Player = () => {
                 className="playButton"
                 onClick={playingButton}
               >
-                <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
+                <IconContext.Provider value={{ size: "3.1em", color: "#fff" }}>
                   <AiFillPlayCircle />
                 </IconContext.Provider>
               </button>
@@ -214,7 +214,7 @@ const Player = () => {
                 className="playButton"
                 onClick={playingButton}
               >
-                <IconContext.Provider value={{ size: "3.5em", color: "#fff" }}>
+                <IconContext.Provider value={{ size: "3.1em", color: "#fff" }}>
                   <AiFillPauseCircle />
                 </IconContext.Provider>
               </button>

@@ -76,7 +76,7 @@
   content: attr(data-hover);
   visibility: hidden;
   opacity: 1;
-  width: 50px;
+  font-size: 13px;
   background-color: transparent;
   color: #fff;
   text-align: center;
@@ -89,7 +89,7 @@
   position: absolute;
   z-index: 1;
   left: 20%;
-  top: -20%;
+  top: -15%;
 }
 
 .playButton:hover:before {
